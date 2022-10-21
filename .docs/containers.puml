@@ -1,0 +1,31 @@
+@startuml containers
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!define MATERIAL https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/material
+
+!include DEVICONS/react.puml
+!include DEVICONS/redis.puml
+!include DEVICONS/postgresql.puml
+!include FONTAWESOME/cc_stripe.puml
+!include MATERIAL/email.puml
+!include MATERIAL/book.puml
+
+title "SmartCode Containers"
+
+Person(user, "User", "The user of SmartCode")
+
+System_Boundary(boundary, "Bible Reader System"){
+
+    Container_Boundary(api_boundary, "API"){
+        Container(api, "Bible Reader", "Python Classes", "Python Functionality")
+    }
+}
+Container_Ext(bible_api, "Bible API", "REST API", $sprite="cc_stripe")
+
+Rel_D(user, api, "Uses the app")
+Rel_D(api, bible_api, "Uses the app")
+
+@enduml

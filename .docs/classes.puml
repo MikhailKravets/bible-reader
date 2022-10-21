@@ -1,0 +1,12 @@
+@startuml
+
+title "Bible Reader Classes"
+
+class BibleReader{
+    The class to read the Bible
+    from the REST API
+    +__init__(self, url: str)
+    +get(self, book: str, chapter: int, verse: int)
+}
+
+@enduml
