@@ -2,11 +2,52 @@
 
 title "Bible Reader Classes"
 
-class BibleReader{
-    The class to read the Bible
-    from the REST API
-    +__init__(self, url: str)
-    +get(self, book: str, chapter: int, verse: int)
+package models {
+    class Bible {
+        Bible Model
+    }
+    class Verse {
+        Verse Model
+    }
+    Verse -up-* Bible
 }
+
+package bibles {
+    class AbstractReader{
+        Abstract Reader for all Bible APIs
+        ----
+        +get(self, *args, **kwargs)
+        +prepare_url(self, *args, **kwargs)
+        +prepare_response(self, data)
+    }
+    class BaseReader{
+        Base Reader Class
+        ----
+        +__init__(self, url: str)
+        +request(self, url: str)
+    }
+    package bible{
+        class BibleReader{
+            The class to read the Bible
+            from the REST API
+            ----
+            +get(self, book: str, chapter: int, verse: int)
+        }
+    }
+    package ron_swanson{
+        class RonSwansonReader{
+            The class to read Ron Swanson's quotes
+            from the REST API
+            ----
+            +get(self, term: str)
+        }
+    }
+    BaseReader -up-> AbstractReader
+
+    BibleReader -up-> BaseReader: Inherit constructor
+    RonSwansonReader -up-> BaseReader: Inherit constructor
+}
+Bible -up-o BibleReader
+Bible -up-o RonSwansonReader
 
 @enduml

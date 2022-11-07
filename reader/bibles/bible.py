@@ -1,13 +1,12 @@
+import typing
 from functools import lru_cache
 
-import requests
-
-from reader.constants import DEFAULT_BIBLE_API_URL, REQUEST_TIMEOUT, MAX_CACHE_SIZE
-from reader.errors import APIError
-from reader.models import Verse, Bible
+from reader.bibles import BaseReader
+from reader.constants import DEFAULT_BIBLE_API_URL, MAX_CACHE_SIZE
+from reader.models import Bible, Verse
 
 
-class BibleReader:
+class BibleReader(BaseReader):
     """Read bible verses from remote API
 
     Args:
@@ -15,7 +14,7 @@ class BibleReader:
     """
 
     def __init__(self, url: str = DEFAULT_BIBLE_API_URL):
-        self.url = url
+        super().__init__(url)
 
     @lru_cache(maxsize=MAX_CACHE_SIZE)
     def get(self, book: str, chapter: int, verse: int) -> Bible:
@@ -29,12 +28,12 @@ class BibleReader:
         Returns:
             Bible object containing the information
         """
-        url = f"{DEFAULT_BIBLE_API_URL}{book}+{chapter}:{verse}"
-        resp = requests.get(url, headers={'Content-Type': 'application/json'}, timeout=REQUEST_TIMEOUT)
+        url = self.prepare_url(book, chapter, verse)
+        return self.request(url)
 
-        if not resp.ok:
-            raise APIError(f"API error [{resp.status_code}]: {resp.json()}")
+    def prepare_url(self, book: str, chapter: int, verse: int):
+        return f"{self.url}{book}+{chapter}:{verse}"
 
-        data: dict = resp.json()
+    def prepare_response(self, data: typing.Dict[str, typing.Any]):
         data['verses'] = [Verse.from_dirty_dict(**v) for v in data['verses']]
         return Bible(**data)

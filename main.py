@@ -1,7 +1,8 @@
 import time
 from pprint import pprint
 
-from reader.bibles import BibleReader
+from reader.bibles.ron_swanson import RonSwansonReader
+from reader.bibles.bible import BibleReader
 
 if __name__ == '__main__':
     reader = BibleReader()
@@ -15,3 +16,9 @@ if __name__ == '__main__':
     prev = time.time()
     pprint(reader.get("john", 3, 16))
     print(time.time() - prev)
+
+    print()
+    print("Ron Swanson")
+    print()
+    swanson = RonSwansonReader()
+    pprint(swanson.get("brit"))
