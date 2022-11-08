@@ -34,7 +34,6 @@ class Bible:
         reference: reference to the bible
         translation_id: translation id
     """
-    # TODO: Homework! Finish the documentation for Verse and Bible classes!
     reference: str
     translation_id: str
     translation_name: str
