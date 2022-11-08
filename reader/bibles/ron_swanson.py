@@ -26,7 +26,7 @@ class RonSwansonReader(BaseReader):
 
     def prepare_response(self, data: typing.List[str]):
         """Use standard Bible model but fill
-        the attribute ourselves. A
+        the attribute ourselves
 
         Args:
             data: data to parse and to write into Bible
