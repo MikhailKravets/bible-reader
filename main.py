@@ -2,6 +2,7 @@ import time
 from pprint import pprint
 
 from reader.bibles.ron_swanson import RonSwansonReader
+from reader.bibles.office import TheOfficeReader
 from reader.bibles.bible import BibleReader
 
 if __name__ == '__main__':
@@ -22,3 +23,6 @@ if __name__ == '__main__':
     print()
     swanson = RonSwansonReader()
     pprint(swanson.get("brit"))
+
+    reader = TheOfficeReader()
+    pprint(reader.get())

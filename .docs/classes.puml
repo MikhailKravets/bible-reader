@@ -42,12 +42,22 @@ package bibles {
             +get(self, term: str)
         }
     }
+    package office{
+        class TheOfficeReader{
+            The class to read The Office Quotes
+            from the REST API
+            ----
+            +get(self)
+        }
+    }
     BaseReader -up-> AbstractReader
 
     BibleReader -up-> BaseReader: Inherit constructor
     RonSwansonReader -up-> BaseReader: Inherit constructor
+    TheOfficeReader -up-> BaseReader: Inherit constructor
 }
 Bible -up-o BibleReader
 Bible -up-o RonSwansonReader
+Bible -up-o TheOfficeReader
 
 @enduml
