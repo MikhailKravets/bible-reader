@@ -16,7 +16,6 @@ class BibleReader(BaseReader):
     def __init__(self, url: str = DEFAULT_BIBLE_API_URL):
         super().__init__(url)
 
-    @lru_cache(maxsize=MAX_CACHE_SIZE)
     def get(self, book: str, chapter: int, verse: int) -> Bible:
         """Get the data for the given book, chapter, and verse
 
