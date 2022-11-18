@@ -1,8 +1,7 @@
 import typing
-from functools import lru_cache
 
 from reader.bibles import BaseReader
-from reader.constants import DEFAULT_BIBLE_API_URL, MAX_CACHE_SIZE
+from reader.constants import DEFAULT_BIBLE_API_URL
 from reader.models import Bible, Verse
 
 
